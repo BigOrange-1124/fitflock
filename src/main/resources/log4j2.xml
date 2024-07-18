@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <!-- 日志根路径 -->
+        <Property name="basePath">
+            logs
+        </Property>
+        <!-- log pattern -->
+        <Property name="APP-PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss:SSS} %-5level [%16thread] %logger{1.} %l : %msg%n
+        </Property>
+
+        <Property name="log-path">logs</Property>
+        <!-- login log -->
+        <Property name="login-log">${basePath}/login/login-log.log</Property>
+        <Property name="rolling-file-login-log">${basePath}/login/%d{yyyy-MM-dd}.log</Property>
+        <Property name="audit-sql-log">${basePath}/auditSql/audit-sql-log.log</Property>
+        <Property name="rolling-file-audit-sql-log">${basePath}/auditSql/%d{yyyy-MM-dd}.log</Property>
+        <Property name="upload-image-log">${basePath}/uploadImage/upload-image-log.log</Property>
+        <Property name="rolling-file-upload-image-log">${basePath}/uploadImage/%d{yyyy-MM-dd}.log</Property>
+        <Property name="userinfo-log">${basePath}/userinfo/userinfo-log.log</Property>
+        <Property name="rolling-file-userinfo-log">${basePath}/userinfo/%d{yyyy-MM-dd}.log</Property>
+        <Property name="record-log">${basePath}/record/record-log.log</Property>
+        <Property name="rolling-file-record-log">${basePath}/record/%d{yyyy-MM-dd}.log</Property>
+
+    </Properties>
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </Console>
+
+        <RollingFile name="login_log_file" fileName="${login-log}"
+                     filePattern="${rolling-file-login-log}" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="audit_sql_log_file" fileName="${audit-sql-log}"
+                     filePattern="${rolling-file-audit-sql-log}" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="upload_image_log_file" fileName="${upload-image-log}"
+                     filePattern="${rolling-file-upload-image-log}" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="userinfo_log_file" fileName="${userinfo-log}"
+                     filePattern="${rolling-file-userinfo-log}" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="record_log_file" fileName="${record-log}"
+                     filePattern="${rolling-file-record-log}" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <logger name="loginLog" level="info" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="login_log_file"/>
+        </logger>
+        <logger name="auditSqlLog" level="info" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="audit_sql_log_file"/>
+        </logger>
+        <logger name="uploadImageLog" level="info" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="upload_image_log_file"/>
+        </logger>
+        <logger name="userinfoLog" level="info" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="userinfo_log_file"/>
+        </logger>
+        <logger name="recordLog" level="info" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="record_log_file"/>
+        </logger>
+        <Root level="info">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+    </Loggers>
+</Configuration>
